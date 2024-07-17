@@ -1,6 +1,8 @@
 import { Colors } from "@/constants/Colors"
 import { useEffect, useState } from "react"
 import { Appearance } from "react-native";
+import { useAppSelector } from "./useAppSelector";
+import { selectTheme } from "@/store";
 
 export enum EThemeBase {
   Dark = "dark",
@@ -15,6 +17,9 @@ export type ETheme = EThemeBase | EThemeExtend
 
 export function useTheme(customTheme: ETheme = EThemeBase.Light) {
   const deviceTheme = Appearance.getColorScheme();
+  const remoteTheme = useAppSelector(selectTheme);
+  console.log(remoteTheme);
+  
   const [theme, setTheme] = useState<ETheme>(customTheme);
   const [baseTheme, setBaseTheme] = useState<EThemeBase>(EThemeBase.Light);
 
